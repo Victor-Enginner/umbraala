@@ -1,0 +1,21 @@
+/* Tokens mínimos da Fase 0 (serão substituídos pelos tokens autorais na Fase 1).
+   Paleta do DECISIONS §8: preto mineral, branco técnico, vermelho só alerta,
+   verde orgânico crescimento/descoberta. */
+:root {
+  --mineral-900: #0a0a0b;
+  --mineral-800: #121214;
+  --graphite-600: #3a3a40;
+  --tech-white: #e8e8ea;
+  --alert-red: #d92b2b;
+  --growth-green: #3fb950;
+  --mono: 'JetBrains Mono', 'SFMono-Regular', ui-monospace, monospace;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

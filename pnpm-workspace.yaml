@@ -1,0 +1,4 @@
+# pnpm 11: build scripts aprovados via `pnpm approve-builds`.
+# O postinstall do esbuild é necessário para o dev server/build do Vite.
+allowBuilds:
+  esbuild: true
