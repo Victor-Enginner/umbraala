@@ -1,21 +1,87 @@
-/* Tokens mínimos da Fase 0 (serão substituídos pelos tokens autorais na Fase 1).
-   Paleta do DECISIONS §8: preto mineral, branco técnico, vermelho só alerta,
-   verde orgânico crescimento/descoberta. */
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/*
+ * UMBRAALA — tokens autorais (Fase 1c). Paleta do DECISIONS §8:
+ * preto mineral/grafite, branco técnico, vermelho restrito a alerta/transição,
+ * verde orgânico para crescimento e descoberta.
+ * Semântica compatível com primitivos shadcn/base-nova (background, primary,
+ * destructive, ring, etc.) para que os componentes do registry funcionem sem
+ * sobrescrever seus estilos.
+ */
 :root {
-  --mineral-900: #0a0a0b;
-  --mineral-800: #121214;
-  --graphite-600: #3a3a40;
-  --tech-white: #e8e8ea;
-  --alert-red: #d92b2b;
-  --growth-green: #3fb950;
-  --mono: 'JetBrains Mono', 'SFMono-Regular', ui-monospace, monospace;
+  --background: #0a0a0b;          /* preto mineral */
+  --foreground: #e8e8ea;          /* branco técnico */
+  --card: #121214;                /* grafite profundo */
+  --card-foreground: #e8e8ea;
+  --popover: #141416;
+  --popover-foreground: #e8e8ea;
+  --primary: #3fb950;             /* verde orgânico — crescimento/descoberta */
+  --primary-foreground: #06130a;
+  --secondary: #1b1b1f;
+  --secondary-foreground: #c8c8cd;
+  --muted: #17171a;
+  --muted-foreground: #9a9aa2;
+  --accent: #17171a;
+  --accent-foreground: #e8e8ea;
+  --destructive: #d92b2b;         /* vermelho — só alerta/transição */
+  --border: #26262b;
+  --input: #26262b;
+  --ring: #3fb950;
+  --radius: 0.625rem;
+
+  /* Tipografia: mono de telemetria + fonte de UI legível (Fase 1: sem webfont
+     no bundle — budget do DECISIONS §5; decisão de display font fica p/ 1b) */
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
 
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --font-mono: var(--font-mono);
+  --font-sans: var(--font-sans);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+}
+
+/* Contrato de qualidade: redução de movimento funcional */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

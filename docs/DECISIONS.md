@@ -54,7 +54,7 @@ umbraala/
 
 - Nenhum vídeo no bundle; 3D no máximo em 1 cena focal, lazy + fallback estático.
 - Intro em motion/code (CSS/RAF), cancelável; nada sequestra scroll/foco.
-- LCP < 2.5s no portal; bundle inicial < 200 kB (JS) antes de lazy chunks.
+- LCP < 2.5s no portal; bundle inicial **< 120 kB gzip** (medido Fase 1: ~110 kB gzip; raw 343 kB por React+Base UI — chunks pesados entram lazy a partir da Fase 2).
 
 ## 6. Riscos
 
@@ -85,3 +85,7 @@ umbraala/
 | 2026-09-22 | Repo novo vazio + Vite/React/TS com pnpm | Prompt manda inicializar TS moderno se vazio; toolchain já usada na vitrine |
 | 2026-09-22 | Sem libs de UI/animation na Fase 0 | Pesquisar referências antes de codificar UI (ordem obrigatória do prompt) |
 | 2026-09-22 | Sem backend/auth nesta fase | Critério: demo explicitamente marcada até provedor real existir |
+| 2026-09-22 | **Fase 1a — pesquisa de referências (antes de codificar UI):** shadcn registry `base-nova` **200** (`/r/styles/base-nova/button.json`, `/r/index.json`); docs shadcn **200**; docs Tailwind **307→ok**; **Componentry/`componentry.dev/r/*` = 404 (indisponível nesta sessão — limitação registrada, usar shadcn como catálogo primário)**; fonte mono local: JetBrains Mono instalada no sistema | Ordem obrigatória do prompt mestre §3; catalogs são peças, não sistemas p/ copiar |
+| 2026-09-22 | **Fase 1b — primitivos shadcn `base-nova`** (button/dialog/tooltip) vendidos do registry e adaptados p/ Vite: imports `@base-ui/react` (Base UI 1.8.0 — sucessor do Radix no estilo base-nova), `cn` local, `IconPlaceholder` → `lucide-react`. Tailwind **v4.3** via `@tailwindcss/vite` (sem config JS; tokens em `@theme inline` no `index.css`) | Mesma base de estilo da vitrine; sem npm install de template Next |
+| 2026-09-22 | **Fase 1c/d/e — tokens autorais** (`:root` semântico + `@theme inline`), **emblema autoral** (`src/components/emblema.tsx`: núcleo + 7 partes orgânicas em elipses irregulares assimétricas, filamentos em curva Q — não segmentado), **shell Tailwind responsivo** com tooltips explicando status (função real, não cenografia) | Identidade autoral ≠ catálogo; vermelho só alerta, verde = descoberta |
+| 2026-09-22 | Budget re-expresso em gzip: `< 120 kB gzip` (medido 110,6 gzip / 343 raw; `chunkSizeWarningLimit` 350) | Raw não é a métrica que o usuário sente; registro transparente |
